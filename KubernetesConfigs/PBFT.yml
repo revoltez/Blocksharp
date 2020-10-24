@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment 
+
+metadata:
+    name: member
+spec:
+    replicas: 4
+    selector:
+        matchLabels:
+            app: web
+    template:
+        metadata:
+            labels:
+                app: web
+        spec:
+            containers:
+                - name: mysqlnode 
+                  image: mysql
+                  tty: true
+                  stdin: true
+                  imagePullPolicy: Never
+                  env:
+                  - name: MYSQL_ROOT_PASSWORD
+                    value: sdeath
+                  ports:
+                  - containerPort: 3306
+                    name: mysqlnode
+                - name: pbftnode
+                  image: pbft
+                  imagePullPolicy: Never
+                  tty: true
+                  stdin: true

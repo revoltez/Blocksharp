@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="akka" Version="1.4.9" />
+    <PackageReference Include="akka.cluster" Version="1.4.9" />
+    <PackageReference Include="akka.remote" Version="1.4.9" />
+    <PackageReference Include="Akka.Serialization.Hyperion" Version="1.4.9" />
+    <ProjectReference Include="../BlockchainTypes/Blockchain.csproj" />
+  </ItemGroup>
+
+</Project>

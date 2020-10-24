@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: server 
+spec:
+  containers:
+    - name: startupserver
+      image: startupserverimage
+      tty: true
+      stdin: true
+      ports: 
+      - containerPort: 5005
+      imagePullPolicy: Never
