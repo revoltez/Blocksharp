@@ -1,7 +1,13 @@
 # Blocksharp 
-a fully implemented Blockchain based on the Actor model using Akka.net
+a fully implemented Blockchain based on the Actor model using Akka.net.
 
 this Blockchain is generic meaning it can be used for multiple purposes, such as voting or a cryptocurrency or any form of decentralized app 
+
+this Blockchain uses PBFT (practical byzantine fault tolerance) consensus Algorithm 
+
+## tools
+- Entity core as the ORM (object relational mapper) 
+- Mysql database
 
 # Prerequisites
 - basic knwoeldge on Akka.net and akka.remote 
