@@ -53,11 +53,17 @@ kubectl get pods
 kubectl attach -it pod-name -c pbftnode
 ```
 # screenshots of a voting system 
+- processing PBFT certificates
 ![PREPREPARE](https://user-images.githubusercontent.com/24751547/97487438-2a769700-195d-11eb-9854-ae2294b8b63b.png)
 
-![View Change](https://user-images.githubusercontent.com/24751547/97487474-33676880-195d-11eb-9bca-f4bed5c1fb43.png)
-![transactions Added](https://user-images.githubusercontent.com/24751547/97487502-395d4980-195d-11eb-8997-cb5b2c370afa.png)
+- counting votes
 ![Counting Vote](https://user-images.githubusercontent.com/24751547/97487512-3cf0d080-195d-11eb-8a89-12b61494ff71.png)
+
+-Receiving client transactions
+![transactions Added](https://user-images.githubusercontent.com/24751547/97487502-395d4980-195d-11eb-8997-cb5b2c370afa.png)
+- view change
+![View Change](https://user-images.githubusercontent.com/24751547/97487474-33676880-195d-11eb-9bca-f4bed5c1fb43.png)
+
 
 # contact information 
 email : <eziorevoltez@gmail.com>
