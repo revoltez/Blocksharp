@@ -53,8 +53,9 @@ kubectl get pods
 kubectl attach -it pod-name -c pbftnode
 ```
 # screenshots of a voting system 
-
-
+![processing certificates](https://flic.kr/p/2k1c3av)
+![counting votes](https://flic.kr/p/2k17zeL)
+![view change](https://flic.kr/p/2k17zoo)
 # contact information 
 email : <eziorevoltez@gmail.com>
 linkedin : <linkedin.com/in/houadef-salih-2b92a0188>
