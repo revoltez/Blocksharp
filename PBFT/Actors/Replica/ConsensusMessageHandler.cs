@@ -61,23 +61,23 @@ namespace PBFT
                 switch (Message.Request)
                 {
                     case ConsensusMessageOps.SignPrepareMsg:
-                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.Prepare,config.PubKey,Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber,Message.PBFTMsg.BlockId)));
+                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.Prepare,config.PubKey.ToArray(),Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber,Message.PBFTMsg.BlockId.ToArray())));
                     break;
 
                     case ConsensusMessageOps.SignCommitMsg:
-                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.Commit,config.PubKey,Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber,Message.PBFTMsg.BlockId)));
+                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.Commit,config.PubKey.ToArray(),Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber,Message.PBFTMsg.BlockId.ToArray())));
                     break;                    
                 
                     case ConsensusMessageOps.SignPrePrepareMsg:
-                        Sender.Tell(SignMessage(new PBFTMessage(PBFTMessage.MessageType.PrePrepare,config.PubKey,Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber,Message.PBFTMsg.BlockId)));
+                        Sender.Tell(SignMessage(new PBFTMessage(PBFTMessage.MessageType.PrePrepare,config.PubKey.ToArray(),Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber,Message.PBFTMsg.BlockId.ToArray())));
                     break;
                     
                     case ConsensusMessageOps.SignViewChangeMsg:
-                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.ViewChange,config.PubKey,Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber)));
+                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.ViewChange,config.PubKey.ToArray(),Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber)));
                     break;
                     
                     case ConsensusMessageOps.SignNeViewMsg:
-                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.NewView,config.PubKey,Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber)));
+                        Sender.Tell(SignMessage( new PBFTMessage(PBFTMessage.MessageType.NewView,config.PubKey.ToArray(),Message.PBFTMsg.ViewNumber,Message.PBFTMsg.SequenceNumber)));
                     break;
                 }
             });

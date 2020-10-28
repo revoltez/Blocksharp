@@ -19,19 +19,15 @@ namespace PBFT
         public BlockchainContext Blockchain =new BlockchainContext(); 
         public int SequenceNumber {get ; set ;}= 1;
 
-        Dictionary<CandidtaeList,int> candidateVotes = new Dictionary<CandidtaeList, int>();
+        //Dictionary<CandidtaeList,int> candidateVotes = new Dictionary<CandidtaeList, int>();
         
         public int ViewNumber {get ; set ;}= 0;
         public Block LastBlock{ get; set;}
         public List<Block> Unstored {get ;set;}= new List<Block>();        
-        //this Property was added to reduce The EFCore Ovverhead
+        
         protected override void PreStart()
         {
             CreateGenesisBlock(Blockchain);            
-            candidateVotes.Add(CandidtaeList.alghazali,0);
-            candidateVotes.Add(CandidtaeList.ibncina,0);
-            candidateVotes.Add(CandidtaeList.ibnrochd,0);
-
         }
         public  BlockchainBroker()
         {
@@ -67,7 +63,7 @@ namespace PBFT
                     break;
 
                     case BlockchainOpsRequests.CountVotes:
-                        CountVotes();
+                       // CountVotes();
                     break;
                 }
             });
@@ -75,7 +71,7 @@ namespace PBFT
         }
 
 
-        public void CountVotes()
+       /* public void CountVotes()
         {
             candidateVotes[CandidtaeList.alghazali]=0;
             candidateVotes[CandidtaeList.ibncina]=0;
@@ -116,7 +112,7 @@ namespace PBFT
             {
                 System.Console.WriteLine("Candidate "+item.Key+" has : "+item.Value+" Votes");   
             }
-        }
+        }*/
 
         private void CreateGenesisBlock(BlockchainContext Blockchain)
         {
@@ -189,13 +185,12 @@ namespace PBFT
                 System.Console.WriteLine("NEW BLOCK ADDED, SEQUENCE NUMBER : "+SequenceNumber);
               
                 VerifyUnstored();
-                UpdateVoteCount(Message.block);
                  
-                context.ActorSelection("akka://VotingSystem/user/ConsensusNode/ConsensusMessageHandler").Tell(new UpdateSequenceNumber(SequenceNumber));
-                context.ActorSelection("akka://VotingSystem/user/ConsensusNode/ConsensusMessageHandler/ViewChangeHandler").Tell(new UpdateSequenceNumber(SequenceNumber));
+                context.ActorSelection("akka://Blocksharp/user/ConsensusNode/ConsensusMessageHandler").Tell(new UpdateSequenceNumber(SequenceNumber));
+                context.ActorSelection("akka://Blocksharp/user/ConsensusNode/ConsensusMessageHandler/ViewChangeHandler").Tell(new UpdateSequenceNumber(SequenceNumber));
                 
-                await context.ActorSelection("akka://VotingSystem/user/ConsensusNode/ConsensusMessageHandler/LogBroker").Ask(new LogOpRequest(LogOps.RemoveTransaction,Message.block.Transactions));
-                context.ActorSelection("akka://VotingSystem/user/ConsensusNode/PrimaryActor").Tell(new UpdateSequenceNumber(SequenceNumber));
+                await context.ActorSelection("akka://Blocksharp/user/ConsensusNode/ConsensusMessageHandler/LogBroker").Ask(new LogOpRequest(LogOps.RemoveTransaction,Message.block.Transactions));
+                context.ActorSelection("akka://Blocksharp/user/ConsensusNode/PrimaryActor").Tell(new UpdateSequenceNumber(SequenceNumber));
 
             
             }
@@ -215,7 +210,7 @@ namespace PBFT
         }
     }
 
-        private void UpdateVoteCount(Block block)
+        /* private void UpdateVoteCount(Block block)
         {
             foreach (var item in block.Transactions)
             {
@@ -240,7 +235,7 @@ namespace PBFT
             }
             PrintVotgingResults();   
         }
-
+    */
         private void VerifyUnstored()
         {
             for (int i = 0; i < Unstored.Count; i++)

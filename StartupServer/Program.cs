@@ -63,8 +63,8 @@ namespace StartupServer
 
             
             
-            var System = ActorSystem.Create("System",hocon);
-            var VotingServer= System.ActorOf(Props.Create(()=> new ServerActor()),"ServerActor"); 
+            var System = ActorSystem.Create("Blocksharp",hocon);
+            var Server= System.ActorOf(Props.Create(()=> new ServerActor()),"ServerActor"); 
             
             // Setup an actor that will handle deadletter type messages
             var deadletterWatchMonitorProps= Props.Create(() => new DeadletterMonitor());

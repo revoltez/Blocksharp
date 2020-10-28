@@ -54,7 +54,7 @@ namespace PBFT
                 List<BlockTransaction> transactions= new List<BlockTransaction>();
                 foreach (var item in Message.clientTransactions)
                 {
-                    transactions.Add(new BlockTransaction(item.Id,item.VoteTo));      
+                    transactions.Add(new BlockTransaction(item.Id));      
                 }
                 Block block = new Block(transactions,SequenceNumber,ViewNumber,Message.hash);
                 // send the block received   
@@ -77,7 +77,7 @@ namespace PBFT
                         
                         foreach (var item in createdBlock.clientTransactions)
                         {
-                            transactions.Add(new BlockTransaction(item.Id,item.VoteTo));      
+                            transactions.Add(new BlockTransaction(item.Id));      
                         }
 
                         Block bl = new Block(transactions,SequenceNumber,ViewNumber,createdBlock.hash);

@@ -31,7 +31,8 @@ namespace PBFT
             
             Receive<ClientTransaction>(Message => TransactionHandler.Tell(Message) );
             
-            Receive<PBFTMessage>(Message => ConsensusStarted,Message => 
+            //  function contains two parameters, the first accepts a predicate and the second is the body, both params are lambda expressions
+            Receive<PBFTMessage>(Message => ConsensusStarted, Message => 
             {
                 System.Console.WriteLine("Received "+ Message.MsgType+" Message ");
                 CMessageHandler.Tell(Message);
@@ -75,7 +76,7 @@ namespace PBFT
         public void BootStarp()
         {
             var Register= new RegistrationRequest(Configurations.PubKey,Configurations.MyAddress);
-            Context.ActorSelection($"akka.tcp://VotingSystem@{Configurations.ServerAddress}:5005/user/VotingServerActor/RegistrationHandler").Tell(Register);  
+            Context.ActorSelection($"akka.tcp://Blocksharp@{Configurations.ServerAddress}:5005/user/ServerActor/RegistrationHandler").Tell(Register);  
         }
 
         private void Initialize(IActorRef Message)
@@ -89,9 +90,6 @@ namespace PBFT
                 Primary.Tell(new UpdateSequenceNumber(1));
                 
         }
-
-
-
 
 
 
@@ -125,14 +123,14 @@ namespace PBFT
                 byte[] data7=sha.Hash(Encoding.UTF8.GetBytes(william));
                 byte[] data8=sha.Hash(Encoding.UTF8.GetBytes(alghazali));
 
-                Self.Tell(new ClientTransaction(data,CandidtaeList.alghazali));
-                Self.Tell(new ClientTransaction(data2,CandidtaeList.ibnrochd));
-                Self.Tell(new ClientTransaction(data4,CandidtaeList.alghazali));
-                Self.Tell(new ClientTransaction(data5,CandidtaeList.alghazali));
-                Self.Tell(new ClientTransaction(data6,CandidtaeList.alghazali));
+                Self.Tell(new ClientTransaction(data));
+                Self.Tell(new ClientTransaction(data2));
+                Self.Tell(new ClientTransaction(data4));
+                Self.Tell(new ClientTransaction(data5));
+                Self.Tell(new ClientTransaction(data6));
 
-                Self.Tell(new ClientTransaction(data7,CandidtaeList.ibncina));
-                Self.Tell(new ClientTransaction(data8,CandidtaeList.ibncina));
+                Self.Tell(new ClientTransaction(data7));
+                Self.Tell(new ClientTransaction(data8));
                 
         }
     }

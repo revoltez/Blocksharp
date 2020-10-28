@@ -48,8 +48,8 @@ namespace PBFT
 
             // ""akka.tcp://ConsensusNode@"+configs.MyAddress+@":6969"",
             
-            var MyVotingSystem = ActorSystem.Create("System",ConcatinatedString);
-            IActorRef CNode=MyVotingSystem.ActorOf(Props.Create<ConsensusNode>(configs),"ConsensusNode");
+            var MySystem = ActorSystem.Create("Blocksharp",ConcatinatedString);
+            IActorRef CNode=MySystem.ActorOf(Props.Create<ConsensusNode>(configs),"ConsensusNode");
             
             Console.WriteLine("Press Ctrl + C to cancel!");
             

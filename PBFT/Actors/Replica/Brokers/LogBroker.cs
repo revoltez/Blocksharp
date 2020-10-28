@@ -139,7 +139,7 @@ namespace PBFT
         {
             try
             {
-                var prePrepareLog =  new PrePrepareLog((PrePrepare) Message);
+                var prePrepareLog =  new PrePrepareLog((PrePrepare) Message,Configurations.Members);
 
                     System.Console.WriteLine("------------------------");
                     System.Console.WriteLine("Received PREPREPARE "+Message.SequenceNumber+" : "+Message.ViewNumber);
@@ -150,7 +150,7 @@ namespace PBFT
                 {
                     Log.Logs.Add(prePrepareLog);
                     Log.SaveChanges();
-                    context.ActorSelection("akka://VotingSystem/user/ConsensusNode/ConsensusMessageHandler/ViewChangeHandler").Tell(new ResetViewChange());
+                    context.ActorSelection("akka://Blocksharp/user/ConsensusNode/ConsensusMessageHandler/ViewChangeHandler").Tell(new ResetViewChange());
                     
                     var Child =context.Child("PrepareCommitHandler"+Message.SequenceNumber+""+Message.ViewNumber);
                         if(Equals(Child,ActorRefs.Nobody))

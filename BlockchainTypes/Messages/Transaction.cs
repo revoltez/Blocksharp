@@ -16,7 +16,6 @@ namespace ConsensusMessages
         [MaxLength(256)]
         public byte[] Id {get; set;}
 
-        public CandidtaeList VoteTo {get; set;}
 
         [MaxLength(256)]
         public byte[] Signature { get ; set;}
@@ -29,11 +28,10 @@ namespace ConsensusMessages
             
         }
 
-        public Transaction(byte[] id,CandidtaeList voteTo)
+        public Transaction(byte[] id)
         {
                 Timestamp= DateTime.Now;
                 Id=id;
-                VoteTo= voteTo;
                 Sha256 sha = new Sha256();
                 Hash = sha.Hash(GetBytes());
         }
@@ -41,7 +39,7 @@ namespace ConsensusMessages
         public override string ToString()
         {
             //must add timstamp later , for now cant 
-            return ""+BitConverter.ToString(Id)+VoteTo;
+            return ""+BitConverter.ToString(Id);
         } 
         
         public byte[] GetBytes()
@@ -55,12 +53,7 @@ namespace ConsensusMessages
     public class BlockTransaction : Transaction
     {
 
-        //this constructor is used only for testing
-        public BlockTransaction(byte[] hash)
-        {
-            Hash = hash;
-        }
-        public BlockTransaction(byte[] Id, CandidtaeList VoteTo):base(Id,VoteTo)
+        public BlockTransaction(byte[] Id):base(Id)
         {
 
         }
@@ -80,7 +73,7 @@ namespace ConsensusMessages
     [Table("TransactionPool")]
     public class ClientTransaction : Transaction  {
         
-        public ClientTransaction(byte[] Id,CandidtaeList VoteTo): base(Id,VoteTo)  
+        public ClientTransaction(byte[] Id): base(Id)  
         {  
         }
     }

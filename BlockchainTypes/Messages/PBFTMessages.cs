@@ -2,6 +2,8 @@ using System;
 using System.Text;
 using NSec.Cryptography;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsensusMessages
 {
@@ -35,7 +37,7 @@ namespace ConsensusMessages
         public PBFTMessage(MessageType type, byte[] id,int View, int seq)
         {
             MsgType=type;
-            Id = id; 
+            Id = id.ToArray(); 
             ViewNumber = View;
             SequenceNumber = seq;
             //SignatureAlgorithm.Ed25519.Sign(keys,this.GetBytes());
@@ -44,10 +46,10 @@ namespace ConsensusMessages
         public PBFTMessage(MessageType type, byte[] id,int View, int seq, byte[] blockId)
         {
             MsgType=type;
-            Id = id; 
+            Id = id.ToArray(); 
             ViewNumber = View;
             SequenceNumber = seq;
-            BlockId= blockId;
+            BlockId= blockId.ToArray();
           
         }
 
@@ -84,17 +86,24 @@ namespace ConsensusMessages
         
 
         public bool Commited {get ; set ;} = false ;
-        public bool[] PrepareSent = new bool[5]; 
-        public bool[] CommitSent = new bool [5];
+
+        public Dictionary<string,bool> preparebool = new Dictionary<string, bool>();
+
+        public Dictionary<string,bool> commitbool= new Dictionary<string, bool>();
+
         public int PrepareCounter{get ; set ;}=0;
         public int CommitCounter { get ; set ;} =0;
  
         public PrePrepareLog(){
         
         }
-        public PrePrepareLog(PrePrepare msg) : base (msg.Block,msg.Id ,msg.ViewNumber, msg.SequenceNumber)
+        public PrePrepareLog(PrePrepare msg,SortedList<string,byte[]> members) : base (msg.Block,msg.Id ,msg.ViewNumber, msg.SequenceNumber)
         {
-
+            foreach (var item in members)
+            {
+                preparebool.Add(BitConverter.ToString(item.Value),false);
+                commitbool.Add(BitConverter.ToString(item.Value),false); 
+            }   
         }
 
         //this consctrucot is used whenever a Prepare Message is received 

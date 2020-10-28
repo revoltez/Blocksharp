@@ -32,7 +32,7 @@ namespace PBFT
                 switch (Message.MsgType)
                 {
                     case PBFTMessage.MessageType.PrePrepare:
-                        prePrepare = new PrePrepareLog((PrePrepare)Message);
+                        prePrepare = new PrePrepareLog((PrePrepare)Message,configurations.Members);
                         System.Console.WriteLine("prePrepare Received ");
                         blockid=BitConverter.ToString(prePrepare.BlockId);
                         prePrepare.PrepareCounter++;
@@ -70,10 +70,15 @@ namespace PBFT
 
                 if(prePrepare.BlockId.SequenceEqual(Message.BlockId))
                 {
-                    if(Message.MsgType.Equals(PBFTMessage.MessageType.Prepare))
+                    System.Console.WriteLine("sender id :" + BitConverter.ToString(Message.Id));
+
+                    if(Message.MsgType.Equals(PBFTMessage.MessageType.Prepare) && !prePrepare.preparebool[BitConverter.ToString(Message.Id)])
                     {
                         //test
+                        //check if the message was already sent  
                         prePrepare.PrepareCounter++;
+                        prePrepare.preparebool[BitConverter.ToString(Message.Id)]= true;
+
                         System.Console.WriteLine("prepare counter : "+prePrepare.PrepareCounter +", commit counter : "+prePrepare.CommitCounter);
                         if( prePrepare.PrepareCounter == Configurations.ConsensusTHreashold )
                         {
@@ -92,19 +97,21 @@ namespace PBFT
                         {
                                         //commit the Block and reply to the client 
                             prePrepare.Commited= true;
-                            context.ActorSelection("akka://VotingSystem/user/ConsensusNode/BlockchainBroker").Tell(new BlockchainRequest(BlockchainOpsRequests.AddBlock,prePrepare.Block));
+                            context.ActorSelection("akka://Blocksharp/user/ConsensusNode/BlockchainBroker").Tell(new BlockchainRequest(BlockchainOpsRequests.AddBlock,prePrepare.Block));
                         }       
                     }
-                    else
+                    else if (! prePrepare.commitbool[BitConverter.ToString(Message.Id)])
                     {
                                     //test
                         prePrepare.CommitCounter++;
+                        prePrepare.commitbool[BitConverter.ToString(Message.Id)] = true;
+
                         System.Console.WriteLine("prepare counter : "+prePrepare.PrepareCounter +", commit counter : "+prePrepare.CommitCounter);
                         if(prePrepare.PrepareCounter >= Configurations.ConsensusTHreashold &&  prePrepare.CommitCounter >=Configurations.ConsensusTHreashold && prePrepare.Commited == false)
                         {
                                     //commit the Block and reply to the client 
                             prePrepare.Commited = true;
-                            context.ActorSelection("akka://VotingSystem/user/ConsensusNode/BlockchainBroker").Tell(new BlockchainRequest(BlockchainOpsRequests.AddBlock,prePrepare.Block));
+                            context.ActorSelection("akka://Blocksharp/user/ConsensusNode/BlockchainBroker").Tell(new BlockchainRequest(BlockchainOpsRequests.AddBlock,prePrepare.Block));
                        
                             System.Console.WriteLine("-----------------------");
                             System.Console.WriteLine("Commiting The New Block");

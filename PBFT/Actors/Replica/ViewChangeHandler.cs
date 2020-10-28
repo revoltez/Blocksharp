@@ -49,8 +49,8 @@ namespace PBFT
                         // send a new view Message
                         ViewCounter = 0;
                         ViewNumber++;
-                        Context.ActorSelection("akka://VotingSystem/user/ConsensusNode/PrimaryActor").Tell(new UpdateViewNumber());            
-                        Context.ActorSelection("akka://VotingSystem/user/ConsensusNode/BlockchainBroker").Tell(new UpdateViewNumber());            
+                        Context.ActorSelection("akka://Blocksharp/user/ConsensusNode/PrimaryActor").Tell(new UpdateViewNumber());            
+                        Context.ActorSelection("akka://Blocksharp/user/ConsensusNode/BlockchainBroker").Tell(new UpdateViewNumber());            
                         Context.Parent.Tell(new UpdateViewNumber());
                         System.Console.WriteLine("----------------------");
                         System.Console.WriteLine("New Primary is At : "+Configurations.Members.Keys[ViewNumber%Configurations.Members.Count]);
