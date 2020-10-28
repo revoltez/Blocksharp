@@ -1,5 +1,6 @@
 # Blocksharp 
 a fully implemented Blockchain based on the Actor model using Akka.net
+
 this Blockchain is generic meaning it can be used for multiple purposes, such as voting or a cryptocurrency or any form of decentralized app 
 
 # Prerequisites
