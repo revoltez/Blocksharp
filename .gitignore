@@ -14,7 +14,4 @@ PBFT/Reinistialize.sh
 /StartupServer/obj
 
 
-/KubernetesConfigs/ClearCluster.sh
-/KubernetesConfigs/DeployApp.sh
-/KubernetesConfigs/RebuildCluster.sh
 
