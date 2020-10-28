@@ -31,7 +31,7 @@ there are two apps and one library shared between the the two apps,
 # testing locally 
 - download and build this dockerfile and build it in minikube https://github.com/revoltez/netcorewithef 
 
-a simple image that contains Entity core as a base image for the app, this can be merged with the application image (PBFT), we seperated them so that we dont have to download all the required libariries everytime we test.
+a simple image that contains Entity core as a base image for the app, this can be merged with the application image (PBFT), they are seperated so that i dont download all the required libariries everytime i test.
 
 - start minikube and execute RebuildCluster.sh 
 ```
