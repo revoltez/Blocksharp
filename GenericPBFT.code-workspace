@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "PBFT"
+		},
+		{
+			"path": "StartupServer"
+		},
+		{
+			"path": "BlockchainTypes"
+		},
+		{
+			"path": "KubernetesConfigs"
+		}
+	],
+	"settings": {}
+}
