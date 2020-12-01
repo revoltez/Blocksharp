@@ -24,6 +24,14 @@ there are two apps and one library shared between the the two apps,
 - the library that is used between the two apps is in the BlockchainTypes folder
 
 - kubernetesconfigs is a folder that contains few shell scripts to automate the building process
+# Actor hierarchy 
+- as we all know actors form a hierarchy and the following diagram is the actor hierarchy of the blockchain 
+![actor hieararchy](https://user-images.githubusercontent.com/24751547/97779637-989aa400-1b7f-11eb-9358-54e00e5fb183.png)
+
+# kubernetes config
+- below is a simple diagram that shows the simple network simulated in kubernetes
+![kubernetes](https://user-images.githubusercontent.com/24751547/97779662-cda6f680-1b7f-11eb-9dce-dfb944d566a6.png)
+
 
 # installation
 - downlaod and install minikube 
