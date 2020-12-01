@@ -18,6 +18,8 @@ this Blockchain uses PBFT (practical byzantine fault tolerance) consensus Algori
 ## tools
 - Entity core as the ORM (object relational mapper) 
 - Mysql database
+- Akka.net
+- Nsec (cryptography library)
 
 # Prerequisites
 - basic knwoeldge on Akka.net and akka.remote 
