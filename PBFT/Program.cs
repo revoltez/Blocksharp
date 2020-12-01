@@ -72,7 +72,7 @@ namespace PBFT
                 address =Console.ReadLine();
                 if(IPAddress.TryParse(address,out iP))
                 {
-                    loop =true;
+                    loop =false;
                 }
                 else
                 {
