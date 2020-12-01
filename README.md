@@ -5,6 +5,16 @@ this Blockchain is generic meaning it can be used for multiple purposes, such as
 
 this Blockchain uses PBFT (practical byzantine fault tolerance) consensus Algorithm 
 
+# why not OOP 
+  Designing big scalable distributed systems requires a model that is distributed by default.
+  
+  The traditional object-oriented programming paradigm makes it harder to create such systems and raises huge and big problems, we summarized them as the Three   illusions which are the following: 
+  - the illusion of encapsulation
+  - the illusion of shared memory
+  - the illusion of call stack
+  
+  more detailed informations can be found here https://getakka.net/
+  
 ## tools
 - Entity core as the ORM (object relational mapper) 
 - Mysql database
