@@ -19,12 +19,11 @@ namespace PBFT
         
         protected override void PreStart()
         {
-        
         }
         
         public PrepareCommitHandler(Configs configurations,IActorRef CMessageRef)
         {
-        
+
             CMessageHandler= CMessageRef;
             Configurations = configurations;    
             Receive<PBFTMessage>( Message =>
@@ -84,7 +83,7 @@ namespace PBFT
                         {
                                     
                             var pBFTMessageSigned =(PBFTMessageSigned) await CMessageHandler.Ask(new ConsensusMessageRequest(ConsensusMessageOps.SignCommitMsg,Message));                                        
-                                        
+
                             foreach (var item in Configurations.ReplicaRefrences)
                             {
                                 if(item.Path.ToString().Contains("akka.tcp")) item.Tell(pBFTMessageSigned.PBFTmsg);   

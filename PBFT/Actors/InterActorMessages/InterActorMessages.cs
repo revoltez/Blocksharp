@@ -7,6 +7,7 @@ namespace PBFT
     public class ErrorMessage 
     {
         public string Reason {get ;}
+
         public ErrorMessage(string reason)
         {
             Reason = reason;

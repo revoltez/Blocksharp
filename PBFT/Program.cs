@@ -13,17 +13,15 @@ namespace PBFT
         private static readonly AutoResetEvent _closingEvent = new AutoResetEvent(false);
         static void Main(string[] args)
         {
-            Console.WriteLine("would you please Enter the Server Address");
-            System.Console.WriteLine("---------------------------------------");
-            var address =Console.ReadLine();
+            Configs configs =new Configs(IPAddress.Parse(GetServerIpAddress()));
+
             System.Console.WriteLine("----------------------------------------");
-            Configs configs =new Configs(IPAddress.Parse(address));
 
             Console.WriteLine("PBFT node Running at Ip Address : "+configs.MyAddress);
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("-----------------------------------------------------");
             
-            string UpperHalf = @"
+            string ConfigHead = @"
                 akka {
                     actor {
                         provider = remote
@@ -39,16 +37,14 @@ namespace PBFT
                             port = 5000";
             
             string Hostname=$"\n hostname = {configs.MyAddress}";
-            string Tail=@"
+            string ConfigTail=@"
                         }
                     }
                 }";
 
-            string ConcatinatedString = string.Concat(UpperHalf,Hostname,Tail);
+            string ActorsystemConfig= string.Concat(ConfigHead,Hostname,ConfigTail);
 
-            // ""akka.tcp://ConsensusNode@"+configs.MyAddress+@":6969"",
-            
-            var MySystem = ActorSystem.Create("Blocksharp",ConcatinatedString);
+            var MySystem = ActorSystem.Create("Blocksharp",ActorsystemConfig);
             IActorRef CNode=MySystem.ActorOf(Props.Create<ConsensusNode>(configs),"ConsensusNode");
             
             Console.WriteLine("Press Ctrl + C to cancel!");
@@ -62,5 +58,30 @@ namespace PBFT
             _closingEvent.WaitOne();
         
         }
+
+        public static string GetServerIpAddress()
+        {
+            IPAddress iP;
+            string address="";
+            bool loop = true;
+            Console.WriteLine("would you please Enter the Server Address");
+            System.Console.WriteLine("---------------------------------------");
+
+            while (loop)
+            {
+                address =Console.ReadLine();
+                if(IPAddress.TryParse(address,out iP))
+                {
+                    loop =true;
+                }
+                else
+                {
+                    System.Console.WriteLine("please Eneter a valid ip Address");
+                } 
+            }
+            
+            return address;
+        }
+
     }
 }

@@ -20,7 +20,6 @@ namespace PBFT
         protected override void PreStart()
         {
             BlockchainBroker = Context.ActorOf(Props.Create<BlockchainBroker>(),"BlockchainBroker");
-            //BootStarpLoader = Context.ActorOf(Props.Create<BootStrapLoader>(Configurations.ServerAddress,Configurations.PubKey,Configurations.MyAddress),"BootStarpLoader");
             BootStarp();
         }
 
@@ -28,7 +27,6 @@ namespace PBFT
         {
             Configurations = configs;
 
-            
             Receive<ClientTransaction>(Message => TransactionHandler.Tell(Message) );
             
             //  function contains two parameters, the first accepts a predicate and the second is the body, both params are lambda expressions
@@ -57,7 +55,6 @@ namespace PBFT
                 System.Console.WriteLine("Members list received from Server");
                 System.Console.WriteLine("---------------------------------");
 
-
                 ConsensusStarted = true;
                 Configurations.Members = new SortedList<string,byte[]>(Message.Members);
                 Configurations.ReplicaRefrences = new List<IActorRef>(Message.MembersReferences);
@@ -65,13 +62,10 @@ namespace PBFT
 
                 foreach (var item in Configurations.Members)
                 {
-                    
                         System.Console.WriteLine("Received: "+BitConverter.ToString(item.Value)+" : "+item.Key);
                 }
             });
         }
-
-
 
         public void BootStarp()
         {
@@ -81,14 +75,12 @@ namespace PBFT
 
         private void Initialize(IActorRef Message)
         {
-            
                 Log =Message;
                 TransactionHandler =Context.ActorOf(Props.Create<TransactionHandler>(Log,Configurations.ClientMembers),"TransactionHandler");
                 //test
-                PopulateTXpool();
+                TestData.PopulateTXpool(Self); 
                 Primary = Context.ActorOf(Props.Create<PrimaryActor>(Configurations,BlockchainBroker,Log),"PrimaryActor");
                 Primary.Tell(new UpdateSequenceNumber(1));
-                
         }
 
 
@@ -102,37 +94,6 @@ namespace PBFT
 
 
 
-        private void PopulateTXpool()
-        {
-                string ss= "ddjfhsldf";
-                string jalile ="sflhdslf";
-                string bilale ="bilale jalalati";
-                string ahmad ="winrar ";
-                string kayane="mohammed hijab";
-                string sam="harris";
-                string william="lane craig";
-                string alghazali="kalam cosmological";
-                Sha256 sha = new Sha256();
-                
-                byte[] data= sha.Hash(Encoding.UTF8.GetBytes(ss));
-                byte[] data2= sha.Hash(Encoding.UTF8.GetBytes(jalile));
-                byte[] data3=sha.Hash(Encoding.UTF8.GetBytes(bilale));
-                byte[] data4=sha.Hash(Encoding.UTF8.GetBytes(ahmad));
-                byte[] data5=sha.Hash(Encoding.UTF8.GetBytes(kayane));
-                byte[] data6=sha.Hash(Encoding.UTF8.GetBytes(sam));
-                byte[] data7=sha.Hash(Encoding.UTF8.GetBytes(william));
-                byte[] data8=sha.Hash(Encoding.UTF8.GetBytes(alghazali));
-
-                Self.Tell(new ClientTransaction(data));
-                Self.Tell(new ClientTransaction(data2));
-                Self.Tell(new ClientTransaction(data4));
-                Self.Tell(new ClientTransaction(data5));
-                Self.Tell(new ClientTransaction(data6));
-
-                Self.Tell(new ClientTransaction(data7));
-                Self.Tell(new ClientTransaction(data8));
-                
-        }
     }
     
 }
