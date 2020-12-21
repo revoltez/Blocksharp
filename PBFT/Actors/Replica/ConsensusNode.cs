@@ -37,16 +37,13 @@ namespace PBFT
             });
             
             //should be improved 
-            Receive<IActorRef>(Message =>
+            Receive<LogBrokerCreated>(Message =>
             {
-                if (Message.Path.ToString().Contains("Log"))
-                {
                     System.Console.WriteLine("------------------------------------------");
                     System.Console.WriteLine("Node Is Ready To receive Client Transaction");
                     System.Console.WriteLine("------------------------------------------");
-                    Initialize(Message);
+                    Initialize(Message.LogRef);
 
-                }
             });
              
             Receive<MembersList>(Message => 
@@ -73,27 +70,15 @@ namespace PBFT
             Context.ActorSelection($"akka.tcp://Blocksharp@{Configurations.ServerAddress}:5005/user/ServerActor/RegistrationHandler").Tell(Register);  
         }
 
-        private void Initialize(IActorRef Message)
+        private void Initialize(IActorRef LogRef)
         {
-                Log =Message;
+                Log =LogRef;
                 TransactionHandler =Context.ActorOf(Props.Create<TransactionHandler>(Log,Configurations.ClientMembers),"TransactionHandler");
                 //test
                 TestData.PopulateTXpool(Self); 
                 Primary = Context.ActorOf(Props.Create<PrimaryActor>(Configurations,BlockchainBroker,Log),"PrimaryActor");
                 Primary.Tell(new UpdateSequenceNumber(1));
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
     
 }

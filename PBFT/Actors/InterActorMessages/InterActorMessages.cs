@@ -13,6 +13,15 @@ namespace PBFT
             Reason = reason;
         }
     }
+
+    public class LogBrokerCreated
+    {
+        public IActorRef LogRef { get; }
+        public LogBrokerCreated(IActorRef log)
+        {
+            LogRef=log;
+        }
+    }
     
     #region BlockMessages
     public enum BlockchainOpsRequests
@@ -126,7 +135,7 @@ namespace PBFT
         SignPrePrepareMsg,
         SignViewChangeMsg
     }
-    
+
     public class ConsensusMessageRequest
     {
         public ConsensusMessageOps Request{get ;}

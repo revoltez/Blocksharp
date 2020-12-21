@@ -31,7 +31,7 @@ namespace PBFT
 
             ViewChange = Context.ActorOf(Props.Create<ViewChangeHandler>(Configurations),"ViewChangeHandler");
             Log = Context.ActorOf(Props.Create<LogBroker>(BlockchainBroker,Configurations),"LogBroker");
-            Context.Parent.Tell(Log);
+            Context.Parent.Tell(new LogBrokerCreated(Log));
             
             Receive<PBFTMessage>(Message => VerifyMessageValidty(Message), Message =>
             {   
