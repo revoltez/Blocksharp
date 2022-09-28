@@ -87,5 +87,5 @@ kubectl attach -it pod-name -c pbftnode
 
 
 # contact information 
-email : <eziorevoltez@gmail.com>
-linkedin : <linkedin.com/in/houadef-salih-2b92a0188>
+email : <salih.houadef@gmail.com>
+linkedin : <linkedin.com/in/houadef-salih>
