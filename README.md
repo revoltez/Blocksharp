@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://user-images.githubusercontent.com/24751547/203262649-9d8a8c30-487f-49a4-8d48-5dd2c11d6d0d.png" heigh="250px" width="250px" class="center"></p>
+</p>
+
 # Blocksharp 
 Actor based, horizontally scalabale Blockchain using Akka.net.
 
