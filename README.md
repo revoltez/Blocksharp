@@ -2,6 +2,7 @@
 <img src="https://user-images.githubusercontent.com/24751547/203262649-9d8a8c30-487f-49a4-8d48-5dd2c11d6d0d.png" heigh="250px" width="250px" class="center"></p>
 </p>
 
+
 # Blocksharp 
 Actor based, horizontally scalabale Blockchain using Akka.net.
 
@@ -10,6 +11,8 @@ This Blockchain aims to provide an easy way to create blockchains by simply inje
 This Blockchain uses pBFT (practical byzantine fault tolerance) consensus Algorithm 
 > __Note__
 *this project is still under heavy development*
+
+[![](https://img.shields.io/badge/Donate-yellow?style=for-the-badge)](https://www.patreon.com/free_college)
 # why not OOP 
   Designing big scalable distributed systems requires a model that is distributed by default.
   
