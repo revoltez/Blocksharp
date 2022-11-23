@@ -4,7 +4,7 @@
 
 
 # Blocksharp 
-Actor based, horizontally scalabale Blockchain using Akka.net.
+Actor based, horizontally scalable Blockchain using Akka.net.
 
 This Blockchain aims to provide an easy way to create blockchains by simply injecting your own actor that should represent the blockchain runtime or in other words(the blockchain state transition function)
 
