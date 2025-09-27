@@ -6,13 +6,10 @@
 # Blocksharp 
 Actor based, horizontally scalable Blockchain using Akka.net.
 
-This Blockchain aims to provide an easy way to create blockchains by simply injecting your own actor that should represent the blockchain runtime or in other words(the blockchain state transition function)
-
 This Blockchain uses pBFT (practical byzantine fault tolerance) consensus Algorithm 
 > __Note__
-*this project is still under heavy development*
+*this project is still under development*
 
-[![](https://img.shields.io/badge/Donate-yellow?style=for-the-badge)](https://www.patreon.com/free_college)
 # why not OOP 
   Designing big scalable distributed systems requires a model that is distributed by default.
   
@@ -43,34 +40,6 @@ This Blockchain uses pBFT (practical byzantine fault tolerance) consensus Algori
 - as we all know actors form a hierarchy and the following diagram is the actor hierarchy of the blockchain 
 ![actor hieararchy](https://user-images.githubusercontent.com/24751547/97779637-989aa400-1b7f-11eb-9358-54e00e5fb183.png)
 
-# kubernetes config
-- we used kubernetes to get more realistic and easier testing for a real network.
-- below is a simple diagram that shows the simple network simulated in kubernetes
-![kubernetes](https://user-images.githubusercontent.com/24751547/97779662-cda6f680-1b7f-11eb-9dce-dfb944d566a6.png)
-
-# testing locally 
-- download and build this dockerfile and build it in minikube https://github.com/revoltez/netcorewithef 
-
-a simple image that contains Entity core as a base image for the app, this can be merged with the application image (PBFT), they are seperated so that i dont download all the required libariries everytime i test :)
-
-- start minikube and execute RebuildCluster.sh 
-```
-minikube start
-eval $(minikube docker-env)
-./Rebuildcluster.sh
-```
-- check the server ip address by checking the logs 
-```
-kubectl logs server 
-```
-- get the list of all runnnig pods 
-```
-kubectl get pods
-```
-- attach to the pbftnode and wait for it to complete building and updating the database and then provide it with the server address
-```
-kubectl attach -it pod-name -c pbftnode
-```
 # screenshots of a voting system 
 - processing PBFT certificates
 ![PREPREPARE](https://user-images.githubusercontent.com/24751547/97487438-2a769700-195d-11eb-9854-ae2294b8b63b.png)
@@ -87,4 +56,4 @@ kubectl attach -it pod-name -c pbftnode
 
 # contact information 
 email : <salih.houadef@gmail.com>
-linkedin : <www.linkedin.com/in/houadef-salih>
+linkedin : www.linkedin.com/in/houadef-salih
